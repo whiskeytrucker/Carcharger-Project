@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title><%= title %></title>
+
+    <!-- FAVICON ICO -->
+    <link rel="icon" type="image/x-icon" href="/images/output-onlinepngtools.png">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+    <!-- Leaflet Javascript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- <script src="/javascript/main.js"></script> -->
+
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="/images/output-onlinepngtools.png" alt="Car Charger Logo">
+        </nav>
+        
+        <% console.log('Questo è il primo messaggio\n', message) %>
+        <% console.log('Questo è il secondo messaggio\n', message2) %>
+
+        <% if(message != '' && message != undefined) { %>
+            <div id="alert-message">
+                <div class="alert alert-danger alert-dismissible fade show" role="success">
+                    <div><%= message %></div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        <% } %>
+
+        <% if(message2 != '' && message2 != undefined) { %>
+            <div id="success-message">
+                <div class="alert alert-danger alert-dismissible fade show" role="success">
+                    <div><%= message2 %></div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        <% } %>
+    </header>

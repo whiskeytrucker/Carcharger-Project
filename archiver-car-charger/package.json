@@ -1,0 +1,28 @@
+{
+  "name": "archiver-car-charger",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "aws-jwt-verify": "^4.0.0",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "mqtt": "^4.3.7",
+    "nodemon": "^2.0.22",
+    "path": "^0.12.7",
+    "pg": "^8.11.0"
+  },
+  "main": "app.js",
+  "author": "Campora Poletto Ragno",
+  "license": "ISC",
+  "description": ""
+}

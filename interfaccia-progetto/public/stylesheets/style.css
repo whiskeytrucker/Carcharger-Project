@@ -1,0 +1,576 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+
+:root{
+  --background-nav: #fdfaf9;
+  --background: #f9f3ef;
+  --text: black;
+  --red-logo: #d90037;
+  --red-border: #780300;
+  --color-fill: #f099af;
+}
+
+body {
+  padding: 50px;
+  font: 16px 'Rubik Mono One';
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  /* color: #00B7FF; */
+  text-decoration: none;
+  color: var(--text);
+}
+
+header{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5.5em;
+  /* background-color: rgb(6, 27, 112); */
+  background-color: var(--background-nav);
+  border-radius: 0 0 20px 20px;
+  z-index: 1000;
+}
+
+
+header > nav{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding: 0.5em; */
+  height: 4em;
+  width: 100%;
+}
+
+header > #alert-message{
+  background-color: red;
+}
+
+header > #success-message{
+  background-color: limegreen;
+}
+
+header > #alert-message,
+header > #success-message{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 5.5em;
+  position: fixed;
+  top: 0;
+  border-radius: 0 0 20px 20px;
+  /* background-color: red; */
+  color: var(--background);
+  /* display: none; */
+  /* EVENTUALE ANIMAZIONE INGRESSO E USCITA BANNER ERRORE/SUCCESSO */
+}
+
+header > #alert-message > div,
+header > #success-message > div{
+  /* height: 100%; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header > #alert-message > div > div,
+header > #success-message > div > div{
+  font-size: 0.7em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 70%;
+}
+
+header > #alert-message > div > button,
+header > #success-message > div > button{
+  background-color: var(--background-nav);
+  border-radius: 5px;
+  border: none;
+  height: 2em;
+  width: 2em;
+  position: fixed;
+  right: 2em;
+  top: 2em;
+}
+
+header > #alert-message > div > button > span,
+header > #success-message > div > button > span{
+  font-size: large;
+}
+
+header > nav > img{
+  height: 6em;
+  /* width: 5em; */
+}
+
+#map {
+  height: 100vh; /*180px*/
+  width: 100%;
+}
+
+/* BARRA GRID */
+.barra{
+  display: grid;
+  grid-template-columns: /*15% 25% 20% 25% 15% */repeat(5, 1fr);
+  position: fixed;
+  bottom: 0;
+  height: 5em;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--background-nav);
+  border-radius: 20px 20px 0 0;
+}
+
+.barra > div > a{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text);
+  height: 100%;
+  width: 100%;
+  margin-left: 0.3em;
+  margin-right: 0.3em;
+}
+
+.barra > div > a > .home,
+.barra > div > a > .colonnine,
+.barra > div > a > .prenotazioni,
+.barra > div > a > .info{
+  height: 2.5em;
+  margin-bottom: 2px;
+}
+
+.barra > div > a > .login,
+.barra > div > a > .logout{
+  height: 1.5em;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+
+.barra > div > a > .home-red,
+.barra > div > a > .colonnine-red,
+.barra > div > a > .prenotazioni-red,
+.barra > div > a > .info-red{
+  height: 2.5em;
+  margin-bottom: 2px;
+}
+
+.barra > div > a > p{
+  font-size: 0.5em;
+  margin-top: 0;
+  display: block;
+}
+
+/* BARRA FLEX */
+/* .barra{
+  display: flex;
+  z-index: 1000;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  bottom: 0;
+  height: 5em;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--background-nav);
+  border-radius: 20px 20px 0 0;
+}
+
+
+.barra > div > a{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text);
+  height: 100%;
+  width: 100%;
+}
+
+
+.barra > div > a > .home,
+.barra > div > a > .colonnine,
+.barra > div > a > .prenotazioni,
+.barra > div > a > .info{
+  height: 2.5em;
+  margin-bottom: 2px;
+}
+
+.barra > div > a > .login,
+.barra > div > a > .logout{
+  height: 1.5em;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+
+.barra > div > a > .home-red,
+.barra > div > a > .colonnine-red,
+.barra > div > a > .prenotazioni-red,
+.barra > div > a > .info-red{
+  height: 2.5em;
+  margin-bottom: 2px;
+}
+
+.barra > div > a > p{
+  font-size: 0.5em;
+  margin-top: 0;
+  display: block;
+} */
+
+
+/* PAGINA COLONNINE */
+.sezione-colonnine{
+  display: flex;
+  flex-direction: column;
+  margin-top: 6em;
+  width: 100%;
+  /* border: 1px solid red; */
+}
+
+.info-colonnina{
+  display: grid;
+  grid-template-columns: 15% 15% 20% 25% 10%;
+  align-items: center;
+  list-style: none;
+  height: 7em;
+  /* transform: scale(1, 1.2); */
+  /* font-size: 0.7em; */
+  font-size: 10px;
+  padding: 0;
+  padding-right: 1em;
+  margin-right: 0.5em;
+  margin-left: 0.5em;
+  border-radius: 16px;
+  background-color: var(--background);
+}
+
+/* .info-colonnina:first-child{
+  margin-top: 0;
+} */
+
+.info-colonnina:last-child{
+  margin-bottom: 9.5em;
+}
+
+.info-colonnina > a > img{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  /* height: 6em; */
+  /* width: 7em; */
+  grid-column: 1;
+  height: 5em;
+  width: 5em;
+  border-radius: 16px;
+  padding: 0.5em;
+  /* border: 1px solid orange; */
+}
+
+.info-colonnina > form{
+  /* position: relative;
+  right: 0.5em;
+  bottom: 0.5em; */
+  
+}
+
+.id-col{
+  grid-column: 2;
+  text-align: center;
+  /* margin-left: 1em; */
+  /* margin-right: 1em; */
+  /* padding-left: 1em; */
+  /* padding-right: 1em; */
+}
+
+.nome-col{
+  grid-column: 3;
+  text-align: center;
+  /* margin-right: 1em; */
+  /* padding-right: 1em; */
+}
+
+.cerchia-col{
+  grid-column: 4;
+  text-align: center;
+}
+
+/* .stato{
+  grid-column: 5;
+  text-align: center;
+} */
+
+.prenota{
+  grid-column: 5;
+  /* font-family: 'Rubik Mono One'; */
+  /* font-weight: 200; */
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.9em;
+  border: none;
+  background: white;
+  border: 3px solid var(--red-logo);
+  border-radius: 12px;
+  width: 90px;
+  margin-left: 1em;
+  padding: 1em;
+  cursor: pointer;
+  transform: translateY(4px);
+}
+
+/* .prenota:hover{
+  background-color: var(--red-logo);
+  border: transparent;
+  background-color: var(--color-fill);
+} */
+
+.prenota:active{
+  transform: translateY(4px);
+}
+
+
+
+/* PAGINA SINGOLA COLONNINA */
+.info-col{
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  display: grid;
+  /* grid-template-columns: 1; */
+  grid-template-rows: 3;
+  /* gap: 3em; */
+  height: 90vh;
+  width: 100%;
+  background-color: white;
+  /* border: 1px solid red; */
+  /* padding-top: 8em; */
+  /* padding-bottom: 6em; */
+}
+
+.info-col > .img-col{
+  grid-row: 1;
+  /* grid-column: 1; */
+  display: flex;
+  width: 100%;
+  height: 25vh;
+  align-items: flex-end;
+  justify-content: center;
+  /* border: 1px solid green; */
+  /* padding: 1em; */
+}
+
+.info-col > .img-col > img{
+  height: 5em;
+}
+
+.info-col > .tempo-carica{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* gap: 1em; */
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.info-col > .tempo-carica > p{
+  margin-bottom: 0.2em;
+  font-size: 0.8em;
+}
+
+.info-col > .otp{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5em;
+  grid-row: 2;
+}
+
+.desc-col{
+  padding-top: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-bottom: 1em;
+  /* text-align: justify; */
+  border-radius: 30px 30px 0 0;
+  background-color: var(--background);
+  height: 100%;
+  grid-row: 3;
+  /* margin-left: 1em; */
+  /* margin-right: 1em; */
+  /* border: 1px solid blue; */
+}
+
+.desc-col > p{
+  font-size: 0.8em;
+  margin-bottom: 2em;
+}
+
+
+
+
+
+/* PAGINA PRENOTAZIONI */
+.lista-prenotazioni{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  /* margin-bottom: 5em; */
+  padding-top: 5.5em;
+  padding-bottom: 5em;
+  color: var(--text);
+  /* border: 1px solid red; */
+}
+
+.lista-prenotazioni > div{
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  /* border: 1px solid green; */
+}
+
+.lista-prenotazioni > div > img{
+  height: 5em;
+
+}
+
+.lista-prenotazioni > div > ul{
+  border-radius: 16px;
+  background-color: var(--background);
+  padding: 0.7em;
+  padding-right: 1em;
+  padding-left: 1em;
+  display: grid;
+  grid-template-columns: 2;
+  grid-template-rows: 3;
+  margin-right: 0.5em;
+  width: 100%;
+  /* border: 1px solid purple; */
+}
+
+.lista-prenotazioni > div > ul > li{
+  font-size: 0.7em;
+  /* border: 1px solid orange; */
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.prn-nome{
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.prn-inizio{
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.prn-otp{
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.lista-prenotazioni > div > ul > form{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  /* grid-column: 2; */
+  /* grid-row: 2; */
+}
+
+.lista-prenotazioni > div > ul > .prn-del{
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.lista-prenotazioni > div > ul > .prn-info{
+  grid-column: 2;
+  grid-row: 1;
+  /* margin-bottom: 0.5em; */
+}
+
+.lista-prenotazioni > div > ul > form > button{
+  /* border: none; */
+  border: 2px solid var(--red-border);
+  border-radius: 8px;
+  background-color: transparent;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+  padding-bottom: 0.3em;
+  padding-top: 0.3em;
+}
+
+.lista-prenotazioni > div > ul > form > button > img{
+  width: 2em;
+}
+
+
+
+
+/* CHI SIAMO */
+.gruppo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.gruppo > div > h3{
+  font-weight: 200;
+  grid-column: 2;
+}
+
+.gruppo > div{
+  display: grid;
+  /* flex-direction: row; */
+  /* justify-content: center; */
+  align-items: center;
+  grid-template-columns: 10% 50% 40%;
+  gap: 1em;
+  width: 80%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.gruppo > div > img{
+  width: 2em;
+  height: 2em;
+}
+
+.gruppo > div > p{
+  margin: 0;
+}
+
+.gruppo > div > a{
+  color: var(--red-logo);
+}
+
+
+
+
+
+/* MEDIA QUERY */
+@media(min-width: 37.5em){
+  .info-colonnina{
+    font-size: 0.8em;
+  }
+}

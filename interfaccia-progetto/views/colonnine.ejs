@@ -1,0 +1,88 @@
+<%- include('header') %>
+
+<!-- BARRA DI RICERCA -->
+<!-- <div class="ricerca">
+    <div class="barra-ricerca">
+        <img src="" alt="Lente d'ingrandimento">
+    </div>
+</div> -->
+
+<div class="sezione-colonnine">
+    <% colonnine.forEach((colonnina) => { %>
+        <ul class="info-colonnina">
+            <a href="/colonnina/<%= colonnina.id_colonnina %>">
+                <% if(colonnina.stato === 'libera'){ %>
+                    <img src="/images/Icons/charging-station-2-green-1.png" alt="Colonnina libera">
+                <% }else if(colonnina.stato === 'occupata'){ %>
+                    <img src="/images/Icons/charging-station-2-red.png" alt="Colonnina occupata">
+                <% }else if(colonnina.stato === 'prenotata'){ %>
+                    <img src="/images/Icons/charging-station-2-yellow.png" alt="Colonnina prenotata">
+                <% } %>
+            </a>
+            <li class="colonnina id-col"><%= colonnina.id_colonnina %></li>
+            <li class="colonnina nome-col"><%= colonnina.nome_luogo %></li>
+            <li class="colonnina cerchia-col"><%= colonnina.cerchia %></li>
+            <!-- <li class="stato">Libera</li> -->
+            <% if(utente !== ''){ %>
+                <% if(colonnina.stato === 'libera'){ %>
+                    <form action="/prenotazione" method="POST">
+                        <input type="hidden" name="persona" value="<%= utente %>">
+                        <input type="hidden" name="id_colonnina" value="<%= colonnina.id_colonnina %>">
+                        <input type="hidden" name="nome_colonnina" value="<%= colonnina.nome_luogo %>">
+                        <input type="hidden" name="cerchia" value="<%= colonnina.cerchia %>">
+                        <button type="submit" class="prenota">Prenota</button>
+                    </form>
+                <% } %>
+            <% } %>
+            <!-- <button class="prenota">Prenota</button> -->
+        </ul>
+    <% }) %>
+</div>
+
+<div class="barra">
+    <div>
+        <a href="/">
+            <img src="/images/Icons/pin.png" alt="Logo Home" class="home">
+            <p>Home</p>
+        </a>
+    </div>
+    <div>
+        <a href="/colonnine">
+            <img src="/images/Icons/charging-station-red.png" alt="Logo Colonnine Red" class="colonnine-red">
+            <p style="color: #d90037;">Colonnine</p>
+        </a>
+    </div>
+
+    <div>
+        <%#= utente %>
+        <a href="/prenotazioni/<%= utente %>">
+            <img src="/images/Icons/stopwatch.png" alt="Logo Prenotazione" class="prenotazioni">
+            <p>Prenotazioni</p>
+        </a>
+    </div>
+
+    <div>
+        <a href="/chi-siamo">
+            <img src="/images/Icons/car.png" alt="Logo Informazioni" class="info">
+            <p>Chi siamo</p>
+        </a>
+    </div>
+
+    <% if(utente != ''){ %>
+    <div>
+        <a href="/logout">
+            <img src="/images/Icons/logout.png" alt="Logo Logout" class="logout">
+            <p>Logout</p>
+        </a>
+    </div>
+    <% }else if(utente == ''){ %>
+        <div>
+            <a href="/login">
+                <img src="/images/Icons/login.png" alt="Logo Login" class="login">
+                <p>Login</p>
+            </a>
+        </div>
+    <% } %>
+</div>
+
+<%- include('footer') %>

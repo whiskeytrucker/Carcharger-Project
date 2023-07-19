@@ -1,0 +1,91 @@
+<%- include('header') %>
+
+<div class="info-col">
+    <% if(colonnina[0].stato === 'libera'){ %>
+        <div class="img-col">
+            <img src="/images/Icons/charging-station-2-green-1.png" alt="Logo Colonnina">
+        </div>
+    <% }else if(colonnina[0].stato === 'prenotata'){ %>
+        <div class="img-col">
+            <img src="/images/Icons/charging-station-2-yellow.png" alt="Logo Colonnina">
+        </div>
+    <% }else if(colonnina[0].stato === 'occupata'){ %>
+        <div class="img-col">
+            <img src="/images/Icons/charging-station-2-red.png" alt="Logo Colonnina">
+        </div>
+    <% } %>
+
+    <!-- <div class="otp">
+        <p>Codice OTP: </p>
+        <p>0123456</p>
+    </div> -->
+
+    <% if(colonnina[0].stato === 'occupata'){ %>
+        <div class="tempo-carica">
+            <p>Fine carica tra: </p>
+            <p><%= colonnina[0].tempo_carica %> minuti</p>
+        </div>
+    <% } %>
+
+    <!-- FARE DUE P, UNO PER L'ETICHETTA E UNO PER I VALORI -->
+    <div class="desc-col">
+        <p>Num: <%= colonnina[0].id_colonnina %></p>
+        <p>Nome: <%= colonnina[0].nome_luogo %></p>
+        <p>Zona: <%= colonnina[0].cerchia %></p>
+        <p>Paese: <%= colonnina[0].ambito %></p>
+        <p>Titolare: <%= colonnina[0].titolare %></p>
+        <p>Indirizzo: <%= colonnina[0].localita %></p>
+        <p>Tecnologia: <%= colonnina[0].infra %></p>
+        <p>Anno: <%= colonnina[0].anno %></p>
+        <p>Stato: <%= colonnina[0].stato %></p>
+    </div>
+</div>
+
+
+<div class="barra">
+    <div>
+        <a href="/">
+            <img src="/images/Icons/pin.png" alt="Logo Home" class="home">
+            <p>Home</p>
+        </a>
+    </div>
+    <div>
+        <a href="/colonnine">
+            <img src="/images/Icons/charging-station-red.png" alt="Logo Colonnine Red" class="colonnine-red">
+            <p style="color: #d90037;">Colonnine</p>
+        </a>
+    </div>
+
+    <div>
+        <%#= utente %>
+        <a href="/prenotazioni/<%= utente %>">
+            <img src="/images/Icons/stopwatch.png" alt="Logo Prenotazione" class="prenotazioni">
+            <p>Prenotazioni</p>
+        </a>
+    </div>
+
+    <div>
+        <a href="/chi-siamo">
+            <img src="/images/Icons/car.png" alt="Logo Informazioni" class="info">
+            <p>Chi siamo</p>
+        </a>
+    </div>
+
+    <% if(utente != ''){ %>
+    <div>
+        <a href="/logout">
+            <img src="/images/Icons/logout.png" alt="Logo Logout" class="logout">
+            <p>Logout</p>
+        </a>
+    </div>
+    <% }else if(utente == ''){ %>
+        <div>
+            <a href="/login">
+                <img src="/images/Icons/login.png" alt="Logo Login" class="login">
+                <p>Login</p>
+            </a>
+        </div>
+    <% } %>
+</div>
+
+<%- include('footer') %>

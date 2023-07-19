@@ -1,0 +1,72 @@
+<%- include('header') %>
+
+<div class="info-col">
+    <div class="img-col">
+        <img src="/images/Icons/car-dealer-red.png" alt="Logo Prenotazione">
+    </div>
+
+    <div class="otp">
+        <p>Codice OTP: </p>
+        <p><%= prenotazione[0].otp %></p>
+    </div>
+
+    <% console.log('Prenotazione ejs', prenotazione[0]) %>
+
+    <!-- FARE DUE P, UNO PER L'ETICHETTA E UNO PER I VALORI -->
+    <div class="desc-col">
+        <p>ID colonnina: <%= prenotazione[0].colonnina %></p>
+        <p>Nome colonnina: <%= prenotazione[0].nome %></p>
+        <p>Zona: <%= prenotazione[0].cerchia %></p>
+        <p>Inizio prenotazione: <%= prenotazione[0].inizio %></p>
+        <p>Citta: <%= prenotazione[0].citta %></p>
+        <p>Indirizzo: <%= prenotazione[0].localita %></p>
+    </div>
+</div>
+
+<div class="barra">
+    <div>
+        <a href="/">
+            <img src="/images/Icons/pin-red.png" alt="Logo Home Red" class="home-red">
+            <p style="color: #d90037;">Home</p>
+        </a>
+    </div>
+    <div>
+        <a href="/colonnine">
+            <img src="/images/Icons/charging-station.png" alt="Logo Colonnine" class="colonnine">
+            <p>Colonnine</p>
+        </a>
+    </div>
+
+    <div>
+        <%#= utente %>
+        <a href="/prenotazioni/<%= utente %>">
+            <img src="/images/Icons/stopwatch-red.png" alt="Logo Prenotazione Red" class="prenotazioni-red">
+            <p style="color: #d90037;">Prenotazioni</p>
+        </a>
+    </div>
+
+    <div>
+        <a href="/chi-siamo">
+            <img src="/images/Icons/car.png" alt="Logo Informazioni" class="info">
+            <p>Chi siamo</p>
+        </a>
+    </div>
+
+    <% if(utente != ''){ %>
+    <div>
+        <a href="/logout">
+            <img src="/images/Icons/logout.png" alt="Logo Logout" class="logout">
+            <p>Logout</p>
+        </a>
+    </div>
+    <% }else if(utente == ''){ %>
+        <div>
+            <a href="/login">
+                <img src="/images/Icons/login.png" alt="Logo Login" class="login">
+                <p>Login</p>
+            </a>
+        </div>
+    <% } %>
+</div>
+
+<%- include('footer') %>

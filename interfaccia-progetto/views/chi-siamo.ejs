@@ -1,0 +1,55 @@
+<%- include('header') %>
+<div class="gruppo">
+    <div><h3>GRUPPO 15</h3></div>
+    <div><img src="/images/Icons/email.png" alt="Icona Email"><p>Emanuele Campora</p><a href="mailto:20029451@studenti.uniupo.it">20029451</a></div>
+    <div><img src="/images/Icons/email.png" alt="Icona Email"><p>Matteo Poletto</p><a href="mailto:20029178@studenti.uniupo.it">20029178</a></div>
+    <div><img src="/images/Icons/email.png" alt="Icona Email"><p>Riccardo Ragno</p><a href="mailto:20029254@studenti.uniupo.it">20029254</a></div>
+</div>
+    
+<div class="barra">
+    <div>
+        <a href="/">
+            <img src="/images/Icons/pin.png" alt="Logo Home" class="home">
+            <p>Home</p>
+        </a>
+    </div>
+    <div>
+        <a href="/colonnine">
+            <img src="/images/Icons/charging-station.png" alt="Logo Colonnine" class="colonnine">
+            <p>Colonnine</p>
+        </a>
+    </div>
+
+    <div>
+        <%#= utente %>
+        <a href="/prenotazioni/<%= utente %>">
+            <img src="/images/Icons/stopwatch.png" alt="Logo Prenotazione" class="prenotazioni">
+            <p>Prenotazioni</p>
+        </a>
+    </div>
+
+    <div>
+        <a href="/chi-siamo">
+            <img src="/images/Icons/car-red.png" alt="Logo Informazioni Red" class="info-red">
+            <p style="color: #d90037;">Chi siamo</p>
+        </a>
+    </div>
+
+    <% if(utente != ''){ %>
+    <div>
+        <a href="/logout">
+            <img src="/images/Icons/logout.png" alt="Logo Logout" class="logout">
+            <p>Logout</p>
+        </a>
+    </div>
+    <% }else if(utente == ''){ %>
+        <div>
+            <a href="/login">
+                <img src="/images/Icons/login.png" alt="Logo Login" class="login">
+                <p>Login</p>
+            </a>
+        </div>
+    <% } %>
+</div>
+
+<%- include('footer') %>

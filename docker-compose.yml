@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  nginx:
+    container_name: nginx
+    depends_on:
+      - progetto-reti-2
+      - archiver
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf:/etc/nginx
+      - ./nginx/certs/:/etc/nginx/certs/
+
+  progetto-reti-2:
+    container_name: progetto-reti-2
+    stdin_open: true
+    build:
+      dockerfile: Dockerfile
+      context: ./progetto-reti-2/
+    environment:
+      - AWS_COGNITO_USERPOOL_ID=eu-north-1_3xHlO3KO2
+      - AWS_COGNITO_CLIENT_ID=2pvlparps5taordhs5ok5tonp8
+    volumes:
+      - /progetto-reti-2/node_modules
+      - ./progetto-reti-2:/progetto
+
+  archiver:
+    container_name: archiver-car-charger
+    build:
+      dockerfile: Dockerfile
+      context: ./archiver-car-charger/
+    environment:
+      - RDS_PORT=5432
+      - RDS_HOSTNAME=database-2.cm1nefxysi9s.eu-north-1.rds.amazonaws.com
+      - POSTGRESQL_DB_USER=postgres
+      - POSTGRESQL_DB_PASSWORD=admin123
+      - RDS_NAME=carcharger
+      - AWS_COGNITO_USERPOOL_ID=eu-north-1_3xHlO3KO2
+      - AWS_COGNITO_CLIENT_ID=2pvlparps5taordhs5ok5tonp8
+    volumes:
+      - /archiver/node_modules
+      - ./archiver-car-charger:/archiver
+  
+  mosquitto:
+    container_name: mosquitto-aws
+    image: eclipse-mosquitto:latest
+    build:
+      dockerfile: Dockerfile
+      context: ./broker/
+    volumes:
+    - ./broker/config:/mosquitto/config/
+    #- ./broker/data:/mosquitto/data/
+    #- ./broker/log:/mosquitto/log/ 
+    ports:
+      - '8883:8883'
+      - '1883:1883'
+    restart: always
+    

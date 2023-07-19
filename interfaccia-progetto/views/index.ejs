@@ -1,0 +1,53 @@
+<%- include('header') %>
+    <div id="map" class="map">
+
+    </div>
+    <%= console.log('Questo è il valore di loggato nell\'ejs', utente) %>
+    <div class="barra">
+        <div>
+            <a href="/">
+                <img src="/images/Icons/pin-red.png" alt="Logo Home Red" class="home-red">
+                <p style="color: #d90037;">Home</p>
+            </a>
+        </div>
+        <div>
+            <a href="/colonnine">
+                <img src="/images/Icons/charging-station.png" alt="Logo Colonnine" class="colonnine">
+                <p>Colonnine</p>
+            </a>
+        </div>
+
+        <div>
+            <%#= utente %>
+            <a href="/prenotazioni/<%= utente %>">
+                <img src="/images/Icons/stopwatch.png" alt="Logo Prenotazione" class="prenotazioni">
+                <p>Prenotazioni</p>
+            </a>
+        </div>
+
+        <div>
+            <a href="/chi-siamo">
+                <img src="/images/Icons/car.png" alt="Logo Informazioni" class="info">
+                <p>Chi siamo</p>
+            </a>
+        </div>
+
+        <% if(utente != ''){ %>
+        <div>
+            <a href="/logout">
+                <img src="/images/Icons/logout.png" alt="Logo Logout" class="logout">
+                <p>Logout</p>
+            </a>
+        </div>
+        <% }else if(utente == ''){ %>
+            <div>
+                <a href="/login">
+                    <img src="/images/Icons/login.png" alt="Logo Login" class="login">
+                    <p>Login</p>
+                </a>
+            </div>
+        <% } %>
+    </div>
+
+    <script src="/javascript/main.js"></script>
+<%- include('footer') %>

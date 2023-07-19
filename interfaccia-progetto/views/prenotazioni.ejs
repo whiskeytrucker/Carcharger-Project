@@ -1,0 +1,81 @@
+<%- include('header') %>
+
+<div class="lista-prenotazioni">
+    <% console.log('Queste sono le prenotazioni in ejs', prenotazioni) %>
+    <% prenotazioni.forEach((prenotazione) => { %>
+        <div>
+            <img src="/images/Icons/car-dealer-red.png" alt="Logo Prenotazione">
+            <ul>
+                <li class="li-prenotazione prn-nome">Nome: <%= prenotazione.nome %></li>
+                <li class="li-prenotazione prn-inizio">Ora di prenotazione: <%= prenotazione.inizio %></li>
+                <li class="li-prenotazione prn-otp">OTP: <%= prenotazione.otp %></li>
+                <form method="POST" action="/info-prenotazione" class="prn-info">
+                    <input type="hidden" name="id_prn" value="<%= prenotazione.id_prn %>">
+                    <input type="hidden" name="nome_prn" value="<%= prenotazione.nome %>">
+                    <input type="hidden" name="inizio" value="<%= prenotazione.inizio %>">
+                    <input type="hidden" name="cerchia" value="<%= prenotazione.cerchia %>">
+                    <input type="hidden" name="utente" value="<%= utente %>">
+                    <input type="hidden" name="id_col" value="<%= prenotazione.id_col %>">
+                    <button type="submit"><img src="/images/Icons/open-eye-red.png" alt="Visualizza"></button>
+                </form>
+                <form method="POST" action="/elimina-prenotazione" class="prn-del">
+                    <input type="hidden" name="id_prn" value="<%= prenotazione.id_prn %>">
+                    <input type="hidden" name="nome_prn" value="<%= prenotazione.nome %>">
+                    <input type="hidden" name="inizio" value="<%= prenotazione.inizio %>">
+                    <input type="hidden" name="cerchia" value="<%= prenotazione.cerchia %>">
+                    <input type="hidden" name="utente" value="<%= utente %>">
+                    <input type="hidden" name="id_col" value="<%= prenotazione.id_col %>">
+                    <button type="submit"><img src="/images/Icons/delete-red.png" alt="Elimina"></button>
+                </form>
+            </ul>
+        </div>
+    <% }) %>
+</div>
+
+<div class="barra">
+    <div>
+        <a href="/">
+            <img src="/images/Icons/pin.png" alt="Logo Home" class="home">
+            <p>Home</p>
+        </a>
+    </div>
+    <div>
+        <a href="/colonnine">
+            <img src="/images/Icons/charging-station.png" alt="Logo Colonnine" class="colonnine">
+            <p>Colonnine</p>
+        </a>
+    </div>
+
+    <div>
+        <%#= utente %>
+        <a href="/prenotazioni/<%= utente %>">
+            <img src="/images/Icons/stopwatch-red.png" alt="Logo Prenotazione Red" class="prenotazioni-red">
+            <p style="color: #d90037;">Prenotazioni</p>
+        </a>
+    </div>
+
+    <div>
+        <a href="/chi-siamo">
+            <img src="/images/Icons/car.png" alt="Logo Informazioni" class="info">
+            <p>Chi siamo</p>
+        </a>
+    </div>
+
+    <% if(utente != ''){ %>
+    <div>
+        <a href="/logout">
+            <img src="/images/Icons/logout.png" alt="Logo Logout" class="logout">
+            <p>Logout</p>
+        </a>
+    </div>
+    <% }else if(utente == ''){ %>
+        <div>
+            <a href="/login">
+                <img src="/images/Icons/login.png" alt="Logo Login" class="login">
+                <p>Login</p>
+            </a>
+        </div>
+    <% } %>
+</div>
+
+<%- include('footer') %>
