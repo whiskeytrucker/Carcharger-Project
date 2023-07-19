@@ -52,24 +52,24 @@ app.locals.message = '';
 app.locals.message2 = '';
 
 // QUERY ELIMINAZIONE PRENOTAZIONI
-// function delPrnScadute(ore, minuti){
-//   const risposta = fetch('http://archiver:3001/del-prn-scadute', {
-//     method: 'POST',
-//     header: {'Content-Type':'application/x-www-form-urlencoded'},
-//     body: new URLSearchParams({
-//       ore: ore,
-//       minuti: minuti
-//     })
-//     // .then((res) => {return res.json()})
-//   })
-// }
+function delPrnScadute(ore, minuti){
+  const risposta = fetch('http://archiver:3001/del-prn-scadute', {
+    method: 'POST',
+    header: {'Content-Type':'application/x-www-form-urlencoded'},
+    body: new URLSearchParams({
+      ore: ore,
+      minuti: minuti
+    })
+    // .then((res) => {return res.json()})
+  })
+}
 
 // ELIMINAZIONE OGNI 5 MINUTI DELLE PRENOTAZIONI "SCADUTE"
-// setInterval(function(){
-//   const ore = new Date().getHours()
-//   const minuti = new Date().getMinutes();
-//   delPrnScadute(ore, minuti);
-// }, 300000)
+setInterval(function(){
+  const ore = new Date().getHours()
+  const minuti = new Date().getMinutes();
+  delPrnScadute(ore, minuti);
+}, 300000)
 
 // set up the session
 app.use(session({
