@@ -7,6 +7,4 @@ http://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_
 
 
 ## Autori
-
-- [@paolo-celestino](https://github.com/paolo-celestino)
 - [@whiskeytrucker](https://github.com/whiskeytrucker)
