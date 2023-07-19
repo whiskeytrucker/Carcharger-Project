@@ -313,7 +313,6 @@ void loop() {
         double media_curr = readCurr();
 
         int val = analogRead(pin_trimmer);
-        Serial.print("Trimmer AnalogRead: ");Serial.println(val);
         if(analogRead(pin_trimmer) > 4090)val = 100;
         else if(analogRead(pin_trimmer) < 370) val = 0;
         else val = map(val,0,4096,0,100);
@@ -322,11 +321,10 @@ void loop() {
         // TOPIC 1 - CORRENTE
         int percBatt = val; // 10-100%
         int valBatt = 30; // in kWhr
-        float pwr = media_curr*tensione;   // in W
         mkmessageCurr(message, "event", "corrente", media_curr, "capacita", valBatt, "percentuale", percBatt);
         //sprintf(message,"{\"event\":\"%d.%d\"}",(int)val, (int)(val*100)-(int)val*100);
-        Serial.print("Message Topic 1 "); Serial.print(TOPIC1); Serial.print(": ");
-        Serial.println(message);
+        //Serial.print("Message Topic 1 "); Serial.print(TOPIC1); Serial.print(": ");
+        //Serial.println(message);
         client.publish(TOPIC1 "/dati", message);
         printValuesToLCD(media_curr, percBatt);
         
@@ -343,8 +341,8 @@ void loop() {
           char otp[50];
           otpIn.toCharArray(otp, otpIn.length());
           mkmessageOTP(message, "event", "OTP", otp);
-          Serial.print("Message Topic 2 "); Serial.print(TOPIC2); Serial.print(": ");
-          Serial.println(message);
+          //Serial.print("Message Topic 2 "); Serial.print(TOPIC2); Serial.print(": ");
+          //Serial.println(message);
           client.publish(TOPIC2 "/otp", message);
         }
     count++;
