@@ -1,10 +1,11 @@
 /*********
   Poletto Matteo
-  Celestino Paolo
 *********/
 #include <WiFi.h>
 #include <PubSubClient.h>
 #include <Wire.h>
+#include <WiFiUdp.h>
+#include <ArduinoMDNS.h>
 #include "EmonLib.h"
 
 #include <LiquidCrystal_I2C.h> // Libreria display I2C
@@ -48,7 +49,9 @@ const char* passWifi = "ktHmenxmGJhbH4hn"; //"ktHmenxmGJhbH4hn";
 
 char hostName[] = "carcharger";
 
-char* mqtt_server = "192.168.1.2";
+IPAddress mqtt_server(0, 0, 0, 0);
+
+//char* mqtt_server = "192.168.1.2";
 int mqtt_port = 1883;
 
 char* mqtt_user = "colonnina_1";
@@ -65,6 +68,8 @@ char const description[]="{\"desc\":[{\"name\":\"TM\",\"desc\":{\"field\":\"valu
 WiFiClient clientWifi;
 PubSubClient client;
 
+WiFiUDP udp;
+MDNS mdns(udp);
 
 
 long lastMsg = 0;
@@ -80,6 +85,8 @@ int myclock = 0;
 
 void nameFound(const char* name, IPAddress ip);
 
+byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
+byte ip[] = { 192,168,1,177 };
 
 
 // -------------------------- MQTT --------------------------
@@ -162,6 +169,9 @@ void setup_wifi() {
 
 
   printStuffToLCD("IP address: ", WiFi.localIP().toString());
+
+  mdns.begin(WiFi.localIP(), "colonnina_1");
+  mdns.setNameResolvedCallback(nameFound);
   /*clientRete.setCACert(test_root_ca);
   clientRete.setCertificate(test_client_cert); // for client verification
   clientRete.setPrivateKey(test_client_key);	// for client verification*/
@@ -261,12 +271,32 @@ void setup() {
 
 // -------------------------- LOOP --------------------------
 void loop() {
+
+  if(mqtt_server[0] == 0) {
+   // Serial.println(hostName);
+    //scoperta dei servizi
+    mdns.resolveName(hostName, 5000); 
+
+    //si ripete il loop finchè non si torva il server
+    //si comporta come una break, riesegue il loop
+    mdns.run();
+   // Serial.println(server);
+    delay(6000);
+  }
+  else {
+    //se cade la connessione, si riconnette
+    if (!client.connected()) {
+      client.setServer(mqtt_server, 1883);
+      reconnect();
+    }
+  }
+
   
   //Serial.println("Sono nel loop");
   char message[BSZ];
-  if(!client.connected()){
+  /*if(!client.connected()){
     reconnect();
-  }
+  }*/
 
 
   
@@ -291,7 +321,7 @@ void loop() {
         
         // TOPIC 1 - CORRENTE
         int percBatt = val; // 10-100%
-        int valBatt = random(30,50); // in kWhr
+        int valBatt = 30; // in kWhr
         float pwr = media_curr*tensione;   // in W
         mkmessageCurr(message, "event", "corrente", media_curr, "capacita", valBatt, "percentuale", percBatt);
         //sprintf(message,"{\"event\":\"%d.%d\"}",(int)val, (int)(val*100)-(int)val*100);
@@ -368,4 +398,21 @@ double readCurr(){
   if(media < 0)media = 0;
   Serial.print("Media Corrente: ");Serial.println(media);
   return media;
+}
+
+//assegna al server l'ip della macchina scoperta (htmaster)
+void nameFound(const char* name, IPAddress ip){
+  Serial.print(name);Serial.print("@");
+  Serial.println(ip);
+  if (ip != INADDR_NONE) {
+    Serial.print("The IP address for '");
+    Serial.print(name);
+    Serial.print("' is ");
+    Serial.println(ip);
+    mqtt_server = ip;
+  } else {
+    Serial.print("Resolving '");
+    Serial.print(name);
+    Serial.println("' timed out.");
+  }
 }
