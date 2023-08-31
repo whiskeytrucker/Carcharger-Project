@@ -13,13 +13,9 @@ const { verifyToken } = require('./ver-log')
 
 require('dotenv').config();
 
-const dao = require('./models/dao')
-
 const indexRouter = require('./routes/index');
 
 const usersRouter = require('./routes/users');
-
-const db = require('./db.js');
 
 const userCodes = require('./map');
 
