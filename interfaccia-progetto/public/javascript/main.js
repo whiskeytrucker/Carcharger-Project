@@ -60,16 +60,13 @@
 
             map.setView([lat, lng]);
 
-            const risposta = fetch('https://carcharger.uniupo.click/archiver/', { /* Da cambiare e da fare una route specifica per prendere i dati dal db passando dall'archiver */
+            const risposta = fetch('https://carcharger.uniupo.click/archiver/', {
                 method: 'GET',
-                // header: 'Access-Control-Allow-Origin'
                 header: {'Content-Type':'application/x-www-form-urlencoded'},
             }).then((res) => {return res.json()
             }).then((chargers) => {
                 const mappa = chargers.body.chargers;
                 mappa.forEach((punto) => {
-                    // console.log('Questo è un punto');
-                    // console.log(punto)
                     const id = punto.id_colonnina;
                     const nome = punto.nome_luogo;
                     const cerchia = punto.cerchia;
@@ -78,43 +75,27 @@
                     const stato = punto.stato;
                     const tempo = punto.tempo;
 
-                    // if(punto.stato === 'libera'){
-                    //     punto.icona === green;
-                    // }
-                    // else if(punto.stato === 'prenotata'){
-                    //     punto.icona === yellow;
-                    // }
-                    // else{
-                    //     punto.icona === red;
-                    // }
-
                     if(stato === 'libera'){
                         L.marker([latitudine, longitude], {
-                            icon: green, /* da sostituire poi con punto.stato */
+                            icon: green,
                             title: nome
                         }).bindPopup(`<b>${id}</b><br><b>${nome}</b><br>${cerchia}`).addTo(map)
                     }
                     else if(stato === 'prenotata'){
                         L.marker([latitudine, longitude], {
-                            icon: yellow, /* da sostituire poi con punto.stato */
+                            icon: yellow,
                             title: nome
                         }).bindPopup(`<b>${id}</b><br><b>${nome}</b><br>${cerchia}`).addTo(map)
                     }
                     else if(stato === 'occupata'){
                         L.marker([latitudine, longitude], {
-                            icon: red, /* da sostituire poi con punto.stato */
+                            icon: red,
                             title: nome
                         }).bindPopup(`<b>${id}</b><br><b>${nome}</b><br>${cerchia}<br><b>${tempo} minuti</b>`).addTo(map)
                     }
                     
                 })
             })
-
-            // setTimeout(function(){
-            //     console.log('Questa è la mappa nel set timeout')
-            //     console.log(mappa)
-            // }, 3000)
-
         }
 
         function error(err){

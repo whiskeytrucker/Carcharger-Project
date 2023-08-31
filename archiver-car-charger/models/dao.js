@@ -3,9 +3,7 @@
 const client = require('../db.js');
 
 exports.getAllChargers = function(){
-    // client.connect();
     return new Promise((resolve, reject) => {
-        // const sql = 'SELECT * FROM colonnine ORDER BY id_colonnina ASC LIMIT 10';
         const sql = 'SELECT colonnine.*, dati_colonnine.* FROM colonnine LEFT JOIN dati_colonnine ON id_colonnina = id_col ORDER BY id_colonnina ASC LIMIT 10'
         client.query(sql, (err, row) => {
             if(err){
@@ -31,7 +29,6 @@ exports.getAllChargers = function(){
 
 exports.getOneCharger = function(id_col){
     return new Promise((resolve, reject) => {
-        // const sql = 'SELECT * FROM colonnine WHERE id_colonnina = $1';
         const sql = 'SELECT colonnine.*, dati_colonnine.tempo_carica FROM colonnine JOIN dati_colonnine ON colonnine.id_colonnina = dati_colonnine.id_col WHERE id_colonnina = $1'
         client.query(sql, [id_col], (err, row) => {
             if(err){
@@ -145,7 +142,6 @@ exports.setFreeScadute = function(id_col){
 }
 
 exports.delPrenotazione = function(id_prenotazione, username, nome_colonnina, inizio, cerchia, id_col){
-    // console.log(`ID PRENOTAZIONE ${id_prenotazione}, USERNAME ${username}, NOME COLONNINA ${nome_colonnina}, INIZIO ${inizio}, CERCHIA ${cerchia}, ID_COL ${id_col}`)
     return new Promise((resolve, reject) => {
         const sql = 'DELETE FROM prenotazioni WHERE id_prenotazione = $1 AND username = $2 AND inizio = $3 AND cerchia = $4 AND colonnina = $5';
         client.query(sql, [id_prenotazione, username, inizio, cerchia, id_col], (err, row) => {
@@ -168,7 +164,6 @@ exports.delPrenotazioneFromId = function(id_col){
             if(err){
                 const message = 'Errore durante l\'eliminazione'
                 resolve(message);
-                // return;
             }
             const message = 'Eliminazione avvenuta con successo';
             resolve(message);
@@ -182,7 +177,6 @@ exports.getPrnScadute = function(){
     const intervallo = '15 minutes';
     let colonnine_scadute = '';
     return new Promise((resolve, reject) => {
-        // const sql = `SELECT * FROM prenotazioni WHERE iniziotimestamp < NOW() - INTERVAL '15 minutes`;
         const sql = 'SELECT * FROM prenotazioni WHERE iniziotimestamp < NOW() - $1::INTERVAL';
         client.query(sql, [intervallo],(err, row) => {
             if(err){

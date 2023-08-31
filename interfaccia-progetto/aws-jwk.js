@@ -10,7 +10,6 @@ exports.getJWK = function(){
     setInterval(async () => {
         const res = await fetch(uri);
         const jwk = await res.json();
-        console.log('Questo è JWK', jwk);
 
         fs.writeFile(path, JSON.stringify(jwk, null, 2), (error) => {
             if(error){
